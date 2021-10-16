@@ -1,4 +1,4 @@
-package concurrent;
+package ru.job4j.concurrent;
 
 public class Wget {
     public static void main(String[] args) {
