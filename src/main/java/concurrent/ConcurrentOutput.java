@@ -6,6 +6,9 @@ public class ConcurrentOutput {
         second.start();
         Thread third = new Thread(() -> System.out.println(Thread.currentThread().getName()));
         third.start();
-        System.out.println(Thread.currentThread().getName());
+        while (second.getState() != Thread.State.TERMINATED || third.getState() != Thread.State.TERMINATED) {
+            continue;
+        }
+        System.out.println("finish");
     }
 }
