@@ -28,7 +28,7 @@ public class ConsoleProgress implements Runnable {
             try {
                 Thread.sleep(250); /* симулируем выполнение параллельной задачи в течение 1 секунды. */
             } catch (InterruptedException e) {
-                e.printStackTrace();
+                Thread.currentThread().interrupt();
             }
             count++;
             count = count % 4;
