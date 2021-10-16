@@ -21,6 +21,8 @@ public class ConsoleProgress implements Runnable {
                 case 3:
                     simb = "\\";
                     break;
+                default:
+                    break;
             }
             System.out.print("\r loading ... " + simb);
             try {
