@@ -3,7 +3,7 @@ package ru.job4j.io;
 import java.io.*;
 import java.util.function.Predicate;
 
-public class ParseFile {
+public final class ParseFile {
     private final File file;
 
     public ParseFile(File file) {
@@ -26,12 +26,10 @@ public class ParseFile {
     }
 
     public String getContent() {
-        Predicate<Integer> predicate = (data) -> true;
-        return getContentPred(predicate);
+        return getContentPred((data) -> true);
     }
 
     public String getContentWithoutUnicode() {
-        Predicate<Integer> predicate = (data) -> data < 0x80;
-        return getContentPred(predicate);
+        return getContentPred((data) -> data < 0x80);
     }
 }

@@ -5,7 +5,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.OutputStream;
 
-public class SaveFile {
+public final class SaveFile {
     private final File file;
 
     public SaveFile(File file) {
@@ -14,7 +14,7 @@ public class SaveFile {
 
     public void saveContent(String content) {
         try (OutputStream o = new BufferedOutputStream(new FileOutputStream(file))) {
-            for (int i = 0; i < content.length(); i += 1) {
+            for (int i = 0; i < content.length(); i++) {
                 o.write(content.charAt(i));
             }
         } catch (Exception e) {
