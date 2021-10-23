@@ -89,6 +89,11 @@
       <artifactId>jcip-annotations</artifactId>
       <version>1.0</version>
     </dependency>
+    <dependency>
+      <groupId>ru.job4j</groupId>
+      <artifactId>junior</artifactId>
+      <version>2.0</version>
+    </dependency>
   </dependencies>
   <build>
     <plugins>
