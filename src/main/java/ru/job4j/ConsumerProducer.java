@@ -34,7 +34,7 @@ public class ConsumerProducer {
                     e.printStackTrace();
                 }
                 System.out.println(poll);
-                if ("done".equals(poll))){
+                if ("done".equals(poll)) {
                     return;
                 }
             }
