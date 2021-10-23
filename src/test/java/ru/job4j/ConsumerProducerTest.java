@@ -5,7 +5,6 @@ import org.junit.Test;
 import ru.job4j.produserconsumer.SimpleBlockingQueue;
 
 import static org.hamcrest.Matchers.is;
-import static org.junit.Assert.*;
 
 public class ConsumerProducerTest {
 
@@ -24,8 +23,6 @@ public class ConsumerProducerTest {
                 " and platform to help developers be more productive.",
                 "done"
         };
-
-        System.out.println("dfgdfg");
 
         ConsumerProducer.setQueue(new SimpleBlockingQueue<>(5));
         ConsumerProducer.setMes(messages);
