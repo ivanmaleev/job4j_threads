@@ -1,4 +1,4 @@
-package ru.job4j.Bank;
+package ru.job4j.bank;
 
 import java.util.Objects;
 
@@ -42,9 +42,9 @@ public class User {
 
     @Override
     public String toString() {
-        return "User{" +
-                "id=" + id +
-                ", amount=" + amount +
-                '}';
+        return "User{"
+                + "id=" + id
+                + ", amount=" + amount
+                + '}';
     }
 }
