@@ -12,9 +12,9 @@ public class ConsumerProducer {
         @Override
         public void run() {
             for (int i = 0; i < mes.length; i++) {
-                queue.offer(mes[i]);
                 try {
                     Thread.sleep(100);
+                    queue.offer(mes[i]);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
@@ -27,9 +27,14 @@ public class ConsumerProducer {
         @Override
         public void run() {
             while (true) {
-                String poll = queue.poll();
+                String poll = null;
+                try {
+                    poll = queue.poll();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
                 System.out.println(poll);
-                if (poll.equals("done")) {
+                if ("done".equals(poll))){
                     return;
                 }
             }
