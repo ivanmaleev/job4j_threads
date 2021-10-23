@@ -3,23 +3,20 @@ package ru.job4j.bank;
 import net.jcip.annotations.GuardedBy;
 import net.jcip.annotations.ThreadSafe;
 
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 @ThreadSafe
 public class UserStore {
     @GuardedBy("this")
-    private final List<User> userList;
-
-    public UserStore(List<User> userList) {
-        this.userList = userList;
-    }
+    private final Map<Integer, User> userList = new HashMap<>();
 
     public synchronized boolean add(User user) {
-        return userList.add(user);
+        return userList.put(user.getId(), user) == null;
     }
 
     public synchronized boolean update(User user) {
-        User userToUpdate = userList.get(userList.indexOf(user));
+        User userToUpdate = userList.get(user.getId());
         if (userToUpdate == null) {
             return false;
         }
@@ -28,7 +25,7 @@ public class UserStore {
     }
 
     public synchronized boolean delete(User user) {
-        return userList.remove(user);
+        return userList.remove(user.getId()) != null;
     }
 
     public synchronized boolean transfer(int fromId, int toId, int amount) {
