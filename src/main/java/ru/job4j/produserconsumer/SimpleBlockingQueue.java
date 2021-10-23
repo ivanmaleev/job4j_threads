@@ -12,7 +12,6 @@ public class SimpleBlockingQueue<T> {
     @GuardedBy("this")
     private Queue<T> queue = new LinkedList<>();
     private int maxSize;
-    private boolean done = false;
 
     public SimpleBlockingQueue(int maxSize) {
         this.maxSize = maxSize;
@@ -28,9 +27,6 @@ public class SimpleBlockingQueue<T> {
 
     public synchronized T poll() throws InterruptedException {
         while (queue.size() == 0) {
-            if (done) {
-                return null;
-            }
             wait();
         }
         notifyAll();
@@ -39,13 +35,5 @@ public class SimpleBlockingQueue<T> {
 
     public synchronized int size() {
         return queue.size();
-    }
-
-    public synchronized boolean getDone() {
-        return done;
-    }
-
-    public synchronized void setDone(boolean done) {
-        this.done = done;
     }
 }

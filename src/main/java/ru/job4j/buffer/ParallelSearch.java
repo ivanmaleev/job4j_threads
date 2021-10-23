@@ -9,7 +9,7 @@ public class ParallelSearch {
         final Thread consumer = new Thread(
                 () -> {
                     while (!Thread.currentThread().isInterrupted()
-                            || queue.size() != 0 || !queue.getDone()) {
+                            || queue.size() != 0) {
                         Integer poll = null;
                         try {
                             poll = queue.poll();
@@ -25,7 +25,7 @@ public class ParallelSearch {
         consumer.start();
         final Thread producer = new Thread(
                 () -> {
-                    for (int index = 0; index != 300; index++) {
+                    for (int index = 0; index != 3; index++) {
                         try {
                             queue.offer(index);
                             Thread.sleep(50);
@@ -33,7 +33,6 @@ public class ParallelSearch {
                             Thread.currentThread().interrupt();
                         }
                     }
-                    queue.setDone(true);
                 }
         );
         producer.start();
