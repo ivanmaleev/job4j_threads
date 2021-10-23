@@ -5,7 +5,7 @@ import ru.job4j.produserconsumer.SimpleBlockingQueue;
 public class ConsumerProducer {
 
     public static SimpleBlockingQueue<String> queue;
-    public static String mes[];
+    public static String[] mes;
 
     public static class Producer implements Runnable {
 
