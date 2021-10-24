@@ -3,13 +3,13 @@ package ru.job4j.bank;
 import net.jcip.annotations.GuardedBy;
 import net.jcip.annotations.ThreadSafe;
 
-import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 @ThreadSafe
 public class UserStore {
     @GuardedBy("this")
-    private final Map<Integer, User> userList = new HashMap<>();
+    private final Map<Integer, User> userList = new ConcurrentHashMap<>();
 
     public synchronized boolean add(User user) {
         return userList.putIfAbsent(user.getId(), user) == null;
