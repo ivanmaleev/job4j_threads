@@ -16,7 +16,7 @@ public class ConsumerProducer {
                     Thread.sleep(100);
                     queue.offer(mes[i]);
                 } catch (InterruptedException e) {
-                    e.printStackTrace();
+                    Thread.currentThread().interrupt();
                 }
             }
         }
@@ -31,7 +31,7 @@ public class ConsumerProducer {
                 try {
                     poll = queue.poll();
                 } catch (InterruptedException e) {
-                    e.printStackTrace();
+                    Thread.currentThread().interrupt();
                 }
                 System.out.println(poll);
                 if ("done".equals(poll)) {
