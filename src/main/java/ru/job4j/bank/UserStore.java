@@ -12,20 +12,15 @@ public class UserStore {
     private final Map<Integer, User> userList = new HashMap<>();
 
     public synchronized boolean add(User user) {
-        return userList.put(user.getId(), user) == null;
+        return userList.putIfAbsent(user.getId(), user) == null;
     }
 
     public synchronized boolean update(User user) {
-        User userToUpdate = userList.get(user.getId());
-        if (userToUpdate == null) {
-            return false;
-        }
-        userToUpdate.setAmount(user.getAmount());
-        return true;
+        return userList.replace(user.getId(), user) != null;
     }
 
     public synchronized boolean delete(User user) {
-        return userList.remove(user.getId()) != null;
+        return userList.remove(user.getId(), user);
     }
 
     public synchronized boolean transfer(int fromId, int toId, int amount) {
