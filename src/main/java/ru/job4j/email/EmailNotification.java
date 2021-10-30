@@ -13,8 +13,8 @@ public class EmailNotification {
 
     public void emailTo(User user) {
         pool.submit(() -> {
-            String subject = "Notification" + user.getUsername() +
-                    " to email " + user.getEmail();
+            String subject = "Notification" + user.getUsername()
+                    + " to email " + user.getEmail();
             String body = "Add a new event to " + user.getUsername();
             send(subject, body, user.getEmail());
         });
