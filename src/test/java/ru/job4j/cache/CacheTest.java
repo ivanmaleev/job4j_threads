@@ -3,8 +3,6 @@ package ru.job4j.cache;
 import org.junit.Assert;
 import org.junit.Test;
 
-import static org.junit.Assert.*;
-
 public class CacheTest {
 
     @Test
@@ -26,6 +24,9 @@ public class CacheTest {
         Cache cache = new Cache();
         cache.add(base1);
         base1.setName("Base 111");
+        Assert.assertTrue(cache.update(base1));
+        base1 = new Base(1, 2);
+        base1.setName("Base 1.2");
         Assert.assertTrue(cache.update(base1));
     }
 

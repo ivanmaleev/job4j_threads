@@ -15,7 +15,9 @@ public class Cache {
             if (model.getVersion() != memory.get(k).getVersion()) {
                 throw new OptimisticException("Not updated");
             }
-            return model;
+            Base newModel = new Base(model.getId(), model.getVersion() + 1);
+            newModel.setName(model.getName());
+            return newModel;
         }) != null;
     }
 
