@@ -9,7 +9,6 @@ public class ThreadPool implements Runnable {
     private final List<Thread> threads = new LinkedList<>();
     private final SimpleBlockingQueue<Runnable> tasks =
             new SimpleBlockingQueue<>(10);
-    private volatile boolean isRunning = false;
 
     public ThreadPool() {
         for (int i = 0; i < Runtime.getRuntime().availableProcessors(); i++) {
@@ -23,12 +22,13 @@ public class ThreadPool implements Runnable {
     }
 
     public void shutdown() {
-        isRunning = false;
+        for (Thread thread : threads) {
+            thread.interrupt();
+        }
     }
 
     @Override
     public void run() {
-        isRunning = true;
         for (Thread thread : threads) {
             thread.start();
         }
@@ -38,15 +38,13 @@ public class ThreadPool implements Runnable {
 
         @Override
         public void run() {
-            while (isRunning) {
-                try {
-                    Runnable task = tasks.poll();
-                    if (task != null) {
-                        task.run();
-                    }
-                } catch (InterruptedException e) {
-                    Thread.currentThread().interrupt();
+            try {
+                Runnable task = tasks.poll();
+                if (task != null) {
+                    task.run();
                 }
+            } catch (InterruptedException e) {
+                Thread.currentThread().interrupt();
             }
         }
     }
