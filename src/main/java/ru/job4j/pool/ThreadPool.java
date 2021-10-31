@@ -38,13 +38,15 @@ public class ThreadPool implements Runnable {
 
         @Override
         public void run() {
-            try {
-                Runnable task = tasks.poll();
-                if (task != null) {
-                    task.run();
+            while (!Thread.currentThread().isInterrupted()) {
+                try {
+                    Runnable task = tasks.poll();
+                    if (task != null) {
+                        task.run();
+                    }
+                } catch (InterruptedException e) {
+                    Thread.currentThread().interrupt();
                 }
-            } catch (InterruptedException e) {
-                Thread.currentThread().interrupt();
             }
         }
     }
