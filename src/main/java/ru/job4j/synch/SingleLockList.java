@@ -1,26 +1,25 @@
-/*package ru.job4j.synch;
+package ru.job4j.synch;
 
-import net.jcip.annotations.GuardedBy;
 import net.jcip.annotations.ThreadSafe;
-import ru.job4j.collection.SimpleArray;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
 @ThreadSafe
 public class SingleLockList<T> implements Iterable<T> {
-    @GuardedBy("this")
-    private final SimpleArray<T> list;
+    private final List<T> list;
 
     public SingleLockList(List<T> list) {
-        this.list = (List) list.clone();
+        this.list = copy(list);
     }
 
     public synchronized void add(T value) {
+        list.add(value);
     }
 
     public synchronized T get(int index) {
-        return null;
+        return copy(this.list).get(index);
     }
 
     @Override
@@ -28,6 +27,7 @@ public class SingleLockList<T> implements Iterable<T> {
         return copy(this.list).iterator();
     }
 
-    private Iterable<T> copy(List<T> list) {
+    private List<T> copy(List<T> list) {
+        return new ArrayList<>(list);
     }
-}*/
+}
