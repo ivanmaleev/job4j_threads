@@ -37,10 +37,7 @@ public class ParallelSearch<T> extends RecursiveTask<Integer> {
         rightSearch.fork();
         Integer left = leftSearch.join();
         Integer right = rightSearch.join();
-        if (left != -1) {
-            return left;
-        }
-        return right;
+        return Math.max(left, right);
     }
 
     public static <T> int search(T[] array, T obj) {
