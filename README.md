@@ -2,4 +2,5 @@
 
 [![Build Status](https://app.travis-ci.com/ivanmaleev/job4j_threads.svg?branch=main)](https://app.travis-ci.com/ivanmaleev/job4j_threads)
 
-"Объединение зафиксированных изменений"
+ "Объединение зафиксированных изменений"
+ В курсе производилась работа с ветками git.
